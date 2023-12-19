@@ -1,0 +1,76 @@
+*amplitude, value=relative, name=maintain_load_SI
+0.0, 20.0, 
+5.0, 20.0
+**
+*amplitude, value=relative, name=TF_FE
+0.0, 0,
+0.05, 0,
+0.5, 90.0,
+3, 90.0,
+***2.0, 0,  
+**
+*amplitude, value=relative, name=TF_VV
+0.0, 0,
+1.0, 0
+2.0, 0,  
+**
+*amplitude, value=relative, name=TF_IE
+0.0, 0.0, 
+1.0, 0,
+2.0, 0,
+**
+*amplitude, value=relative, name=TF_ML
+0.0, 0.0, 
+2.0, 0,
+** 
+*amplitude, value=relative, name=TF_AP
+0.0, 0.0, 
+1.0, 20,
+2.0, -20,
+**
+*amplitude, value=relative, name=TF_SI
+0.0, 0.0, 
+2.0, 0,
+*AMPLITUDE, VALUE=RELATIVE, NAME=CONST
+0.0, 1.0,
+4.0, 1.0,
+*AMPLITUDE, VALUE=RELATIVE, NAME=CONST_NEG
+0.0, -1.0,
+4.0, -1.0,
+*AMPLITUDE, VALUE=RELATIVE, NAME=RAMP
+0.0, 0.0,
+0.3, 1.0,
+*AMPLITUDE, VALUE=RELATIVE, NAME=SMOOTH_STEP_OFFSET, DEFINITION=SMOOTH STEP
+0.0, 0.0,
+0.1, 1.0,
+2.0, 1.0,
+*AMPLITUDE, VALUE=RELATIVE, NAME=SMOOTH_STEP_LOAD, DEFINITION=SMOOTH STEP
+0.0, 0.1,
+0.5, 1.0,
+1.0, 1.0,
+*AMPLITUDE, VALUE=RELATIVE, NAME=SMOOTH_STEP, DEFINITION=SMOOTH STEP
+0.0, 0.0,
+0.3, 1.0,
+2.0, 1.0,
+*AMPLITUDE, VALUE=RELATIVE, NAME=TRAP
+0.0, 0.0,
+0.75, 1.0,
+1.0, 1.0,
+2.5, -1.0,
+2.75, -1.0,
+3.50, 0.0,
+4.0, 0.0,
+*AMPLITUDE, VALUE=RELATIVE, NAME=TRAP_SHORT
+0.0, 0.0,
+0.3, 1.0,
+1.0, 1.0,
+*AMPLITUDE, VALUE=RELATIVE, NAME=SMOOTH_TEMP_DEGRADE, DEFINITION=TABULAR,TIME=TOTAL TIME
+0.0, 1.0,
+2.2, 0.0,
+2.9, 0.0,
+10.0, 0.0,
+*AMPLITUDE, VALUE=ABSOLUTE, NAME=SMOOTH_STEP_OFFSET_SETTLE, DEFINITION=TABULAR
+0.0, 0.0,
+0.5, 0.25,
+1.0, -0.05,
+10.0, -0.1,

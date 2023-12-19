@@ -1,0 +1,38 @@
+**PAREMTERS FOR THE ANTEROLATERAL STRUCTURE
+** Orientation derived from Vincent et al 2012 KSSTA
+**
+*NODE,NSET=ALSNSET
+	3404,	45.409,	54.692,	-15.017
+	3405,	44.676,	56.217,	-14.63
+	3400,	44.022,	57.575,	-14.448
+	3401,	40.446,	34.970,	-56.054
+	3402,	41.087,	36.413,	-55.922
+	3403,	41.955,	37.824,	-56.034
+**CONNECTOR ELEMENTS TO REPRESENT THE STRUCTURE
+*ELEMENT,TYPE=CONN3D2,ELSET=ALS_1D
+      30000,      3401,      3404
+      30001,      3400,      3403
+      30002,      3405,      3402
+**
+**NODAL ATTACHMENT TO TIBIA AND FEMUR
+*NSET, NSET=attach_tib_als
+      3401,      3402,      3403
+*NSET, NSET=attach_fem_als
+      3400,      3404,      3405
+**
+*ELEMENT,TYPE=MASS,ELSET=lig_als_mass
+      30100,      3400
+      30101,      3401
+      30102,      3402
+      30103,      3403
+      30104,      3404
+      30105,      3405
+**
+*ELEMENT,TYPE=ROTARYI,ELSET=lig_als_rot
+      30200,      3400
+      30201,      3401
+      30202,      3402
+      30203,      3403
+      30204,      3404
+      30205,      3405
+**

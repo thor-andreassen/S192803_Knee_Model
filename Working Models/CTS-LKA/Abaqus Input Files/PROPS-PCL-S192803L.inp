@@ -1,0 +1,105 @@
+**
+*CONNECTOR SECTION, ELSET=PCLal_1D, BEHAVIOR=pclal_behavior
+AXIAL,
+*CONNECTOR SECTION, ELSET=PCLpm_1D, BEHAVIOR=pclpm_behavior
+AXIAL,
+**
+*PARAMETER
+PCLal_num_sp_par = 2.0
+PCLal_num_sp_ser = 1.0
+** PCLal_L0=free length of the alPCL
+PCLal_L0 = PCLal_L / PCLal_EREF
+** PCLal_K1=calculated coefficient for non-linear stiffness range
+PCLal_K1 = PCLal_K2/4/PCLal_L0/PCLal_ET
+** Calculate reference relative displacements
+PCLal_DF=PCLal_L0-PCLal_L-50
+PCLal_D0=(PCLal_L0-PCLal_L)/PCLal_num_sp_ser
+PCLal_D1=(PCLal_L0*(1+PCLal_ET/2)-PCLal_L)/PCLal_num_sp_ser
+PCLal_D2=(PCLal_L0*(1+PCLal_ET)-PCLal_L)/PCLal_num_sp_ser
+PCLal_D3=(PCLal_L0*(1+PCLal_ET*3/2)-PCLal_L)/PCLal_num_sp_ser
+PCLal_D4=(PCLal_L0*(1+2*PCLal_ET)-PCLal_L)/PCLal_num_sp_ser
+PCLal_D5=(PCLal_L0*(1+4*PCLal_ET)-PCLal_L)/PCLal_num_sp_ser
+PCLal_D6=(PCLal_L0*(1+50*PCLal_ET)-PCLal_L)/PCLal_num_sp_ser
+**
+PCLal_DD0=(PCLal_L0-PCLal_L)
+PCLal_DD1=(PCLal_L0*(1+PCLal_ET/2)-PCLal_L)
+PCLal_DD2=(PCLal_L0*(1+PCLal_ET)-PCLal_L)
+PCLal_DD3=(PCLal_L0*(1+PCLal_ET*3/2)-PCLal_L)
+PCLal_DD4=(PCLal_L0*(1+2*PCLal_ET)-PCLal_L)
+PCLal_DD5=(PCLal_L0*(1+4*PCLal_ET)-PCLal_L)
+PCLal_DD6=(PCLal_L0*(1+50*PCLal_ET)-PCLal_L)
+** Calculate reference ligament forces
+PCLal_FF=0 
+PCLal_F0=0 
+PCLal_F1=(PCLal_K1*(PCLal_L+PCLal_DD1-PCLal_L0)**2)/PCLal_num_sp_par 
+PCLal_F2=(PCLal_K1*(PCLal_L+PCLal_DD2-PCLal_L0)**2)/PCLal_num_sp_par 
+PCLal_F3=(PCLal_K1*(PCLal_L+PCLal_DD3-PCLal_L0)**2)/PCLal_num_sp_par 
+PCLal_F4=(PCLal_K1*(PCLal_L+PCLal_DD4-PCLal_L0)**2)/PCLal_num_sp_par 
+PCLal_F5=(PCLal_K2*(PCLal_L+PCLal_DD5-(1+PCLal_ET)*PCLal_L0))/PCLal_num_sp_par 
+PCLal_F6=(PCLal_K2*(PCLal_L+PCLal_DD6-(1+PCLal_ET)*PCLal_L0))/PCLal_num_sp_par 
+**
+*PARAMETER
+PCLpm_num_sp_par = 2.0
+PCLpm_num_sp_ser = 1.0
+** PCLpm_L0=free length of the pmPCL
+PCLpm_L0 = PCLpm_L / PCLpm_EREF
+** PCLpm_K1=calculated coefficient for non-linear stiffness range
+PCLpm_K1 = PCLpm_K2/4/PCLpm_L0/PCLpm_ET
+** Calculate reference relative displacements
+PCLpm_DF=PCLpm_L0-PCLpm_L-50
+PCLpm_D0=(PCLpm_L0-PCLpm_L)/PCLpm_num_sp_ser
+PCLpm_D1=(PCLpm_L0*(1+PCLpm_ET/2)-PCLpm_L)/PCLpm_num_sp_ser
+PCLpm_D2=(PCLpm_L0*(1+PCLpm_ET)-PCLpm_L)/PCLpm_num_sp_ser
+PCLpm_D3=(PCLpm_L0*(1+PCLpm_ET*3/2)-PCLpm_L)/PCLpm_num_sp_ser
+PCLpm_D4=(PCLpm_L0*(1+2*PCLpm_ET)-PCLpm_L)/PCLpm_num_sp_ser
+PCLpm_D5=(PCLpm_L0*(1+4*PCLpm_ET)-PCLpm_L)/PCLpm_num_sp_ser
+PCLpm_D6=(PCLpm_L0*(1+50*PCLpm_ET)-PCLpm_L)/PCLpm_num_sp_ser
+**
+PCLpm_DD0=(PCLpm_L0-PCLpm_L)
+PCLpm_DD1=(PCLpm_L0*(1+PCLpm_ET/2)-PCLpm_L)
+PCLpm_DD2=(PCLpm_L0*(1+PCLpm_ET)-PCLpm_L)
+PCLpm_DD3=(PCLpm_L0*(1+PCLpm_ET*3/2)-PCLpm_L)
+PCLpm_DD4=(PCLpm_L0*(1+2*PCLpm_ET)-PCLpm_L)
+PCLpm_DD5=(PCLpm_L0*(1+4*PCLpm_ET)-PCLpm_L)
+PCLpm_DD6=(PCLpm_L0*(1+50*PCLpm_ET)-PCLpm_L)
+** Calculate reference ligament forces
+PCLpm_FF=0 
+PCLpm_F0=0 
+PCLpm_F1=(PCLpm_K1*(PCLpm_L+PCLpm_DD1-PCLpm_L0)**2)/PCLpm_num_sp_par 
+PCLpm_F2=(PCLpm_K1*(PCLpm_L+PCLpm_DD2-PCLpm_L0)**2)/PCLpm_num_sp_par 
+PCLpm_F3=(PCLpm_K1*(PCLpm_L+PCLpm_DD3-PCLpm_L0)**2)/PCLpm_num_sp_par 
+PCLpm_F4=(PCLpm_K1*(PCLpm_L+PCLpm_DD4-PCLpm_L0)**2)/PCLpm_num_sp_par 
+PCLpm_F5=(PCLpm_K2*(PCLpm_L+PCLpm_DD5-(1+PCLpm_ET)*PCLpm_L0))/PCLpm_num_sp_par 
+PCLpm_F6=(PCLpm_K2*(PCLpm_L+PCLpm_DD6-(1+PCLpm_ET)*PCLpm_L0))/PCLpm_num_sp_par
+**
+*CONNECTOR BEHAVIOR, NAME=pclal_behavior
+*CONNECTOR ELASTICITY, COMPONENT=1, NONLINEAR
+<PCLal_FF> , <PCLal_DF>
+<PCLal_F0> , <PCLal_D0>
+<PCLal_F1> , <PCLal_D1>
+<PCLal_F2> , <PCLal_D2>
+<PCLal_F3> , <PCLal_D3>
+<PCLal_F4> , <PCLal_D4>
+<PCLal_F5> , <PCLal_D5>
+<PCLal_F6> , <PCLal_D6>
+*CONNECTOR DAMPING, COMPONENT=1
+0.05
+**
+*CONNECTOR BEHAVIOR, NAME=pclpm_behavior
+*CONNECTOR ELASTICITY, COMPONENT=1, NONLINEAR
+<PCLpm_FF> , <PCLpm_DF>
+<PCLpm_F0> , <PCLpm_D0>
+<PCLpm_F1> , <PCLpm_D1>
+<PCLpm_F2> , <PCLpm_D2>
+<PCLpm_F3> , <PCLpm_D3>
+<PCLpm_F4> , <PCLpm_D4>
+<PCLpm_F5> , <PCLpm_D5>
+<PCLpm_F6> , <PCLpm_D6>
+*CONNECTOR DAMPING, COMPONENT=1
+0.05
+**
+*MASS, ELSET=lig_pcl_mass
+1E-6
+*ROTARY INERTIA, ELSET=lig_pcl_rot
+0.001,0.001,0.001
+**

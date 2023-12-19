@@ -1,0 +1,322 @@
+************************************************************
+**** BONE GEOMTRY
+************************************************************
+*INCLUDE, INPUT = BONE1-FEMUR-S192803L.inp
+*INCLUDE, INPUT = BONE2-TIBFIB-S192803L.inp
+***INCLUDE, INPUT = BONE3-PATELLA-S192803L.inp
+*INCLUDE, INPUT = PROPS-BONES.inp
+**************************************************************
+****** CARTILAGE GEOMTRY
+**************************************************************
+*INCLUDE, INPUT = CART1-FEMUR-S192803L_2.inp                        
+*INCLUDE, INPUT = CART2-TIBIA-S192803L_2.inp                        
+*INCLUDE, INPUT=CART-MASS.inp
+***INCLUDE, INPUT = CART3-PATELLA-S192803L.inp 
+**
+*INCLUDE, INPUT = PROPS-CART.inp
+************************************************************
+**** LIGAMENT GEOMTRY
+************************************************************
+*INCLUDE, INPUT = LIG-PARAMETERS-S192803L.inp
+**
+*INCLUDE, INPUT = LIG-ACL-S192803L.inp
+*INCLUDE, INPUT = LIG-ALS-S192803L.inp
+*INCLUDE, INPUT = LIG-LCL-S192803L.inp
+*INCLUDE, INPUT = LIG-MCL-S192803L.inp
+*INCLUDE, INPUT = LIG-PCAP-S192803L.inp
+*INCLUDE, INPUT = LIG-PCL-S192803L.inp
+*INCLUDE, INPUT = LIG-PFL2-S192803L.inp
+**
+*INCLUDE, INPUT = LIGS-ATTACH.inp
+**
+************************************************************
+**** LIGAMENT PROPERTIES
+************************************************************
+*INCLUDE, INPUT = PROPS-ACL-S192803L.inp
+*INCLUDE, INPUT = PROPS-ALS-S192803L.inp
+*INCLUDE, INPUT = PROPS-LCL-S192803L.inp
+*INCLUDE, INPUT = PROPS-MCL-S192803L.inp
+*INCLUDE, INPUT = PROPS-PCAP-S192803L.inp
+*INCLUDE, INPUT = PROPS-PCL-S192803L.inp
+*INCLUDE, INPUT = PROPS-PFL-S192803L.inp
+**
+************************************************************
+**** TENDON GEOMETRY
+************************************************************
+****INCLUDE, INPUT = GEOM_PATLIG-S192803L.inp
+****INCLUDE, INPUT = GEOM_RECTFEM-S192803L.inp
+****INCLUDE, INPUT = GEOM_VASTI-S192803L.inp
+**
+************************************************************
+**** TENDON PROPERTIES
+************************************************************
+****INCLUDE, INPUT = PROPS-RECT_FEM-2D.inp
+****INCLUDE, INPUT = PROPS-VASTI-2D.inp 
+****INCLUDE, INPUT = PROPS_PATLIG-S192803L.inp
+**
+************************************************************
+**** QUADRICEPS MUSCLES
+************************************************************
+****INCLUDE, INPUT = SLIP21-RF-S192803L.inp
+****INCLUDE, INPUT = SLIP22-VM-S192803L.inp
+****INCLUDE, INPUT = SLIP25-VL-S192803L.inp
+****INCLUDE, INPUT = SLIP27-VI-S192803L.inp
+**
+**************************************************************
+**
+****GROOD SUNTAY NODES AND AXIS DEFINITIONS****
+*INCLUDE, INPUT=GS_NODES.inp
+*INCLUDE, INPUT=GS_KIN_AXES.inp
+**
+************************************************************
+**** JOINT KINEMATICS
+************************************************************
+*INCLUDE, INPUT=S192803_AMP_MISC.inp
+*INCLUDE, INPUT=S192803_EBL_AMP_LAXITY_Posterior_90deg.inp
+************************************************************
+************************************************************
+************************************************************
+************************************************************
+************************************************************
+************************************************************
+************************************************************
+************************************************************
+************************************************************
+**** STEP 1: SETTLE MODEL INTO POSITION AT DESIRED FLEXION ANGLE ****
+*STEP, NAME=OFFSET
+	*DYNAMIC, EXPLICIT, DIRECT USER CONTROL
+		1e-3, .2
+**
+**** TIME INTERVAL CAN BE INCREASED FOR THE SETTLING STEP TO REDUCE SIZE OF OUTPUT FILES
+	*OUTPUT,FIELD,VARIABLE=PRESELECT, TIME INTERVAL=0.1
+**
+**** SOME BOUNDARY CONDITIONS: FIX THE TIBIA RIGID BODY REFERENCE NODE, 
+*BOUNDARY, OP=NEW
+	1200000, encastre
+** TIBIOFEMORAL
+**** 0.0174 is conversion from degree to radian as scalar
+**** Sign Conventions of tibia motion relative to femur:
+**** +FE (ML-4) is Flexion, -FE (ML-4) is Extension
+**** +VV (AP-4) is Valgus, -VV (AP-4) is Varus
+**** +IE (SI-4) is External, -IE (IE-4) is Internal
+**** +ML (ML-1) is Medial, -ML (ML-1) is Lateral
+**** +AP (AP-1) is Anterior, -AP (AP-1) is Posterior
+**** +SI (SI-1) is joint distraction, -SI (SI-1) is compression
+**** 
+*CONNECTOR MOTION, OP=NEW
+	axis_TF_ML, 4, 0
+*CONNECTOR MOTION, OP=NEW
+	axis_TF_AP, 4, 0
+	axis_TF_SI, 4, 0
+	axis_TF_ML, 1, 0
+	axis_TF_AP, 1, 0
+*CONNECTOR MOTION, OP=NEW, AMPLITUDE=SMOOTH_STEP_OFFSET
+	axis_TF_SI, 1, .25
+*END STEP
+**************************************************************
+**************************************************************
+**************************************************************
+**************************************************************
+**** STEP 2: SETTLE MODEL INTO POSITION AT DESIRED FLEXION ANGLE ****
+*STEP, NAME=DISP_CONTROL
+	*DYNAMIC, EXPLICIT, DIRECT USER CONTROL
+		1e-3, .3
+**
+**** CONTACT DEFINITIONS AND INCLUSIONS
+****INCLUDE, INPUT=CONTACT-EXTENSOR-2D.inp
+	*INCLUDE, INPUT=CONTACT-INCLUSIONS-PFTF.inp
+	*INCLUDE, INPUT=CONTACT-TF.inp
+****INCLUDE, INPUT=CONTACT-PF.inp
+**** TIME INTERVAL CAN BE INCREASED FOR THE SETTLING STEP TO REDUCE SIZE OF OUTPUT FILES
+	*OUTPUT,FIELD,VARIABLE=PRESELECT, TIME INTERVAL=0.1
+**** SOME BOUNDARY CONDITIONS: FIX THE TIBIA RIGID BODY REFERENCE NODE, 
+*BOUNDARY, OP=NEW
+	1200000, encastre
+** TIBIOFEMORAL
+**** 0.0174 is conversion from degree to radian as scalar
+**** Sign Conventions of tibia motion relative to femur:
+**** +FE (ML-4) is Flexion, -FE (ML-4) is Extension
+**** +VV (AP-4) is Valgus, -VV (AP-4) is Varus
+**** +IE (SI-4) is External, -IE (IE-4) is Internal
+**** +ML (ML-1) is Medial, -ML (ML-1) is Lateral
+**** +AP (AP-1) is Anterior, -AP (AP-1) is Posterior
+**** +SI (SI-1) is joint distraction, -SI (SI-1) is compression
+**** 
+*CONNECTOR MOTION, OP=NEW
+	axis_TF_ML, 4, 0
+*CONNECTOR MOTION, OP=NEW
+	axis_TF_AP, 4, 0
+	axis_TF_SI, 4, 0
+	axis_TF_ML, 1, 0
+	axis_TF_AP, 1, 0
+*CONNECTOR MOTION, OP=NEW, AMPLITUDE=SMOOTH_STEP_LOAD
+	axis_TF_SI, 1, -.1
+***********************************************************
+***********************************************************
+*INCLUDE, INPUT=OUTPUTS-JOINTS.inp
+*INCLUDE, INPUT=OUTPUTS-CONTACT.inp
+*INCLUDE, INPUT=OUTPUTS-LIGS.inp
+*END STEP
+**************************************************************
+**************************************************************
+**************************************************************
+**************************************************************
+**************************************************************
+**************************************************************
+**************************************************************
+**************************************************************
+******* STEP 3: SETTLE MODEL INTO POSITION AT DESIRED FLEXION ANGLE ****
+****STEP, NAME=FLEXION
+***	*DYNAMIC, EXPLICIT, DIRECT USER CONTROL
+***		1e-3, 0.6
+*****
+******* TIME INTERVAL CAN BE INCREASED FOR THE SETTLING STEP TO REDUCE SIZE OF OUTPUT FILES
+***	*OUTPUT,FIELD,VARIABLE=PRESELECT, TIME INTERVAL=0.1
+******* SOME BOUNDARY CONDITIONS: FIX THE TIBIA RIGID BODY REFERENCE NODE, 
+****BOUNDARY, OP=NEW
+***	1200000, encastre
+******* FIX THE MATERIAL FLOW DEGREE OF FREEDOM OF NODES INLCUDED IN THE PFL SLIPRING
+*******BOUNDARY, OP=NEW
+******8409, 10,10, 0.0
+******8410, 10,10, 0.0
+******8411, 10,10, 0.0
+******8401, 10,10, 0.0
+******8402, 10,10, 0.0
+******8405, 10,10, 0.0
+*****
+***************************************************************
+***** TIBIOFEMORAL
+******* 0.0174 is conversion from degree to radian as scalar
+******* Sign Conventions of tibia motion relative to femur:
+******* +FE (ML-4) is Flexion, -FE (ML-4) is Extension
+******* +VV (AP-4) is Valgus, -VV (AP-4) is Varus
+******* +IE (SI-4) is External, -IE (IE-4) is Internal
+******* +ML (ML-1) is Medial, -ML (ML-1) is Lateral
+******* +AP (AP-1) is Anterior, -AP (AP-1) is Posterior
+******* +SI (SI-1) is joint distraction, -SI (SI-1) is compression
+******* 
+****CONNECTOR MOTION, OP=NEW, AMPLITUDE=STEP1_KIN_FE
+***	axis_TF_ML, 4, -0.0174
+****CONNECTOR MOTION, OP=NEW, AMPLITUDE=STEP1_KIN_VV
+***	axis_TF_AP, 4, 0.0174
+****CONNECTOR MOTION, OP=NEW, AMPLITUDE=STEP1_KIN_IE
+***	axis_TF_SI, 4, 0.0174
+****CONNECTOR MOTION, OP=NEW, AMPLITUDE=STEP1_KIN_ML
+***	axis_TF_ML, 1, 1
+****CONNECTOR MOTION, OP=NEW, AMPLITUDE=STEP1_KIN_AP
+***	axis_TF_AP, 1, 1
+****CONNECTOR LOAD, OP=NEW, AMPLITUDE=CONST
+***	axis_TF_SI, 1, <TF_LOAD_STEP2_SI>
+**************************************************************
+**************************************************************
+*****
+**********
+***** SMALL TF SI LOAD // NOT NECESSARY WITH MUSCLE LOADING
+**********
+***** ADD A SMALL SI LOAD ON FEMUR ****
+******CONNECTOR LOAD, OP=NEW, AMPLITUDE=load_SI
+*****axis_TF_SI, 1, -1.0
+*****
+***************************************************************
+******* MUSCLE FORCES
+*******INCLUDE, INPUT=ACT-STEP1-PRETENSION.inp
+***************************************************************
+**********
+***** QUADRICEPS
+**********
+*******CONNECTOR LOAD, OP=NEW, AMPLITUDE=recfem1                    
+******musc-rf, 1, -1                                        
+*******CONNECTOR LOAD, OP=NEW, AMPLITUDE=vasmed1                    
+******musc-vm, 1, -1                                                                                         
+*******CONNECTOR LOAD, OP=NEW, AMPLITUDE=vaslat1                    
+******musc-vl, 1, -1                                                                                                               
+*******CONNECTOR LOAD, OP=NEW, AMPLITUDE=vasint1                    
+******musc-vi, 1, -1  
+*****
+******* OUTPUT FILES FROM STEP 1 *************************************
+****INCLUDE, INPUT=OUTPUTS-JOINTS.inp
+****INCLUDE, INPUT=OUTPUTS-CONTACT.inp
+****INCLUDE, INPUT=OUTPUTS-LIGS.inp
+*****
+****END STEP
+**********************************************************
+**********************************************************
+**********************************************************
+**************************************************************
+**************************************************************
+**************************************************************
+**************************************************************
+**** STEP 4: SETTLE MODEL INTO POSITION AT DESIRED FLEXION ANGLE ****
+*STEP, NAME=LAXITY
+	*DYNAMIC, EXPLICIT, DIRECT USER CONTROL
+		1e-3, 1.5
+**
+**** TIME INTERVAL CAN BE INCREASED FOR THE SETTLING STEP TO REDUCE SIZE OF OUTPUT FILES
+	*OUTPUT,FIELD,VARIABLE=PRESELECT, TIME INTERVAL=0.1
+**** SOME BOUNDARY CONDITIONS: FIX THE TIBIA RIGID BODY REFERENCE NODE, 
+*BOUNDARY, OP=NEW
+	1200000, encastre
+**** FIX THE MATERIAL FLOW DEGREE OF FREEDOM OF NODES INLCUDED IN THE PFL SLIPRING
+****BOUNDARY, OP=NEW
+***8409, 10,10, 0.0
+***8410, 10,10, 0.0
+***8411, 10,10, 0.0
+***8401, 10,10, 0.0
+***8402, 10,10, 0.0
+***8405, 10,10, 0.0
+**
+************************************************************
+** TIBIOFEMORAL
+**** 0.0174 is conversion from degree to radian as scalar
+**** Sign Conventions of tibia motion relative to femur:
+**** +FE (ML-4) is Flexion, -FE (ML-4) is Extension
+**** +VV (AP-4) is Valgus, -VV (AP-4) is Varus
+**** +IE (SI-4) is External, -IE (IE-4) is Internal
+**** +ML (ML-1) is Medial, -ML (ML-1) is Lateral
+**** +AP (AP-1) is Anterior, -AP (AP-1) is Posterior
+**** +SI (SI-1) is joint distraction, -SI (SI-1) is compression
+**** 
+*CONNECTOR MOTION, OP=NEW, AMPLITUDE=STEP2_KIN_FE
+	axis_TF_ML, 4, -0.0174
+*CONNECTOR LOAD, OP=NEW, AMPLITUDE=STEP2_LOAD_VV
+	axis_TF_AP, 4, -1.0
+*CONNECTOR LOAD, OP=NEW, AMPLITUDE=STEP2_LOAD_IE
+	axis_TF_SI, 4, -1.0
+*CONNECTOR LOAD, OP=NEW, AMPLITUDE=STEP2_LOAD_ML
+	axis_TF_ML, 1, 1
+*CONNECTOR LOAD, OP=NEW, AMPLITUDE=STEP2_LOAD_AP
+	axis_TF_AP, 1, 1
+*CONNECTOR LOAD, OP=NEW, AMPLITUDE=CONST
+	axis_TF_SI, 1, <TF_LOAD_STEP2_SI>
+***********************************************************
+***********************************************************
+**
+*******
+** SMALL TF SI LOAD // NOT NECESSARY WITH MUSCLE LOADING
+*******
+** ADD A SMALL SI LOAD ON FEMUR ****
+***CONNECTOR LOAD, OP=NEW, AMPLITUDE=load_SI
+**axis_TF_SI, 1, -1.0
+**
+************************************************************
+**** MUSCLE FORCES
+****INCLUDE, INPUT=ACT-STEP1-PRETENSION.inp
+************************************************************
+*******
+** QUADRICEPS
+*******
+****CONNECTOR LOAD, OP=NEW, AMPLITUDE=recfem1                    
+***musc-rf, 1, -1                                        
+****CONNECTOR LOAD, OP=NEW, AMPLITUDE=vasmed1                    
+***musc-vm, 1, -1                                                                                         
+****CONNECTOR LOAD, OP=NEW, AMPLITUDE=vaslat1                    
+***musc-vl, 1, -1                                                                                                               
+****CONNECTOR LOAD, OP=NEW, AMPLITUDE=vasint1                    
+***musc-vi, 1, -1  
+**
+**** OUTPUT FILES FROM STEP 1 *************************************
+*INCLUDE, INPUT=OUTPUTS-JOINTS.inp
+*INCLUDE, INPUT=OUTPUTS-CONTACT.inp
+*INCLUDE, INPUT=OUTPUTS-LIGS.inp
+**
+*END STEP

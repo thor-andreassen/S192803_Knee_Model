@@ -1,0 +1,109 @@
+**
+*CONNECTOR SECTION, ELSET=ACLpl_1D, BEHAVIOR=ACLpl_behavior
+AXIAL,
+**
+*CONNECTOR SECTION, ELSET=ACLam_1D, BEHAVIOR=ACLam_behavior
+AXIAL,
+**
+*PARAMETER
+ACLpl_num_sp_par = 2.0
+ACLpl_num_sp_ser = 1.0
+** ACLpl_L0=free length of the alPCL
+ACLpl_L0 = ACLpl_L / ACLpl_EREF
+** ACLpl_K1=calculated coefficient for non-linear stiffness range
+ACLpl_K1 = ACLpl_K2/4/ACLpl_L0/ACLpl_ET
+** Calculate reference relative displacements
+ACLpl_DF=ACLpl_L0-ACLpl_L-50
+ACLpl_D0=(ACLpl_L0-ACLpl_L)/ACLpl_num_sp_ser
+ACLpl_D1=(ACLpl_L0*(1+ACLpl_ET/2)-ACLpl_L)/ACLpl_num_sp_ser
+ACLpl_D2=(ACLpl_L0*(1+ACLpl_ET)-ACLpl_L)/ACLpl_num_sp_ser
+ACLpl_D3=(ACLpl_L0*(1+ACLpl_ET*3/2)-ACLpl_L)/ACLpl_num_sp_ser
+ACLpl_D4=(ACLpl_L0*(1+2*ACLpl_ET)-ACLpl_L)/ACLpl_num_sp_ser
+ACLpl_D5=(ACLpl_L0*(1+4*ACLpl_ET)-ACLpl_L)/ACLpl_num_sp_ser
+ACLpl_D6=(ACLpl_L0*(1+50*ACLpl_ET)-ACLpl_L)/ACLpl_num_sp_ser
+**
+ACLpl_DD0=(ACLpl_L0-ACLpl_L)
+ACLpl_DD1=(ACLpl_L0*(1+ACLpl_ET/2)-ACLpl_L)
+ACLpl_DD2=(ACLpl_L0*(1+ACLpl_ET)-ACLpl_L)
+ACLpl_DD3=(ACLpl_L0*(1+ACLpl_ET*3/2)-ACLpl_L)
+ACLpl_DD4=(ACLpl_L0*(1+2*ACLpl_ET)-ACLpl_L)
+ACLpl_DD5=(ACLpl_L0*(1+4*ACLpl_ET)-ACLpl_L)
+ACLpl_DD6=(ACLpl_L0*(1+50*ACLpl_ET)-ACLpl_L)
+** Calculate reference ligament forces
+ACLpl_FF=0 
+ACLpl_F0=0 
+ACLpl_F1=(ACLpl_K1*(ACLpl_L+ACLpl_DD1-ACLpl_L0)**2)/ACLpl_num_sp_par 
+ACLpl_F2=(ACLpl_K1*(ACLpl_L+ACLpl_DD2-ACLpl_L0)**2)/ACLpl_num_sp_par 
+ACLpl_F3=(ACLpl_K1*(ACLpl_L+ACLpl_DD3-ACLpl_L0)**2)/ACLpl_num_sp_par 
+ACLpl_F4=(ACLpl_K1*(ACLpl_L+ACLpl_DD4-ACLpl_L0)**2)/ACLpl_num_sp_par 
+ACLpl_F5=(ACLpl_K2*(ACLpl_L+ACLpl_DD5-(1+ACLpl_ET)*ACLpl_L0))/ACLpl_num_sp_par 
+ACLpl_F6=(ACLpl_K2*(ACLpl_L+ACLpl_DD6-(1+ACLpl_ET)*ACLpl_L0))/ACLpl_num_sp_par 
+**
+*PARAMETER
+ACLam_num_sp_par = 2.0
+ACLam_num_sp_ser = 1.0
+** ACLam_L0=free length of the pmPCL
+ACLam_L0 = ACLam_L / ACLam_EREF
+** ACLam_K1=calculated coefficient for non-linear stiffness range
+ACLam_K1 = ACLam_K2/4/ACLam_L0/ACLam_ET
+** Calculate reference relative displacements
+ACLam_DF=ACLam_L0-ACLam_L-50
+ACLam_D0=(ACLam_L0-ACLam_L)/ACLam_num_sp_ser
+ACLam_D1=(ACLam_L0*(1+ACLam_ET/2)-ACLam_L)/ACLam_num_sp_ser
+ACLam_D2=(ACLam_L0*(1+ACLam_ET)-ACLam_L)/ACLam_num_sp_ser
+ACLam_D3=(ACLam_L0*(1+ACLam_ET*3/2)-ACLam_L)/ACLam_num_sp_ser
+ACLam_D4=(ACLam_L0*(1+2*ACLam_ET)-ACLam_L)/ACLam_num_sp_ser
+ACLam_D5=(ACLam_L0*(1+4*ACLam_ET)-ACLam_L)/ACLam_num_sp_ser
+ACLam_D6=(ACLam_L0*(1+50*ACLam_ET)-ACLam_L)/ACLam_num_sp_ser
+**
+ACLam_DD0=(ACLam_L0-ACLam_L)
+ACLam_DD1=(ACLam_L0*(1+ACLam_ET/2)-ACLam_L)
+ACLam_DD2=(ACLam_L0*(1+ACLam_ET)-ACLam_L)
+ACLam_DD3=(ACLam_L0*(1+ACLam_ET*3/2)-ACLam_L)
+ACLam_DD4=(ACLam_L0*(1+2*ACLam_ET)-ACLam_L)
+ACLam_DD5=(ACLam_L0*(1+4*ACLam_ET)-ACLam_L)
+ACLam_DD6=(ACLam_L0*(1+50*ACLam_ET)-ACLam_L)
+** Calculate reference ligament forces
+ACLam_FF=0 
+ACLam_F0=0 
+ACLam_F1=(ACLam_K1*(ACLam_L+ACLam_DD1-ACLam_L0)**2)/ACLam_num_sp_par 
+ACLam_F2=(ACLam_K1*(ACLam_L+ACLam_DD2-ACLam_L0)**2)/ACLam_num_sp_par 
+ACLam_F3=(ACLam_K1*(ACLam_L+ACLam_DD3-ACLam_L0)**2)/ACLam_num_sp_par 
+ACLam_F4=(ACLam_K1*(ACLam_L+ACLam_DD4-ACLam_L0)**2)/ACLam_num_sp_par 
+ACLam_F5=(ACLam_K2*(ACLam_L+ACLam_DD5-(1+ACLam_ET)*ACLam_L0))/ACLam_num_sp_par 
+ACLam_F6=(ACLam_K2*(ACLam_L+ACLam_DD6-(1+ACLam_ET)*ACLam_L0))/ACLam_num_sp_par
+**
+**
+**
+*CONNECTOR BEHAVIOR, NAME=ACLpl_behavior
+*CONNECTOR ELASTICITY, COMPONENT=1, NONLINEAR
+<ACLpl_FF> , <ACLpl_DF>
+<ACLpl_F0> , <ACLpl_D0>
+<ACLpl_F1> , <ACLpl_D1>
+<ACLpl_F2> , <ACLpl_D2>
+<ACLpl_F3> , <ACLpl_D3>
+<ACLpl_F4> , <ACLpl_D4>
+<ACLpl_F5> , <ACLpl_D5>
+<ACLpl_F6> , <ACLpl_D6>
+*CONNECTOR DAMPING, COMPONENT=1
+0.05
+**
+**
+*CONNECTOR BEHAVIOR, NAME=ACLam_behavior
+*CONNECTOR ELASTICITY, COMPONENT=1, NONLINEAR
+<ACLam_FF> , <ACLam_DF>
+<ACLam_F0> , <ACLam_D0>
+<ACLam_F1> , <ACLam_D1>
+<ACLam_F2> , <ACLam_D2>
+<ACLam_F3> , <ACLam_D3>
+<ACLam_F4> , <ACLam_D4>
+<ACLam_F5> , <ACLam_D5>
+<ACLam_F6> , <ACLam_D6>
+*CONNECTOR DAMPING, COMPONENT=1
+0.05
+**
+*MASS, ELSET=lig_acl_mass
+1E-6
+*ROTARY INERTIA, ELSET=lig_acl_rot
+0.001,0.001,0.001
+**

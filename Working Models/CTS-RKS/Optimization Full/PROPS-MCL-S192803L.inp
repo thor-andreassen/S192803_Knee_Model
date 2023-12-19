@@ -1,0 +1,261 @@
+**
+*CONNECTOR SECTION, ELSET=MCLa_1D, BEHAVIOR=mcla_behavior
+AXIAL,
+**
+*CONNECTOR SECTION, ELSET=MCLm_1D, BEHAVIOR=mclm_behavior
+AXIAL,
+**
+*CONNECTOR SECTION, ELSET=MCLp_1D, BEHAVIOR=mclp_behavior
+AXIAL,
+**
+*CONNECTOR SECTION, ELSET=dMCL_1D, BEHAVIOR=dmcl_behavior
+AXIAL,
+**
+*CONNECTOR SECTION, ELSET=POL_1D, BEHAVIOR=pol_behavior
+AXIAL,
+**
+*PARAMETER
+MCLA_num_sp_par = 1.0
+MCLA_num_sp_ser = 1.0
+** MCL_L0=free length of the MCLA
+MCL_L0 = MCL_L / MCLA_EREF
+** MCLA_K1=calculated coefficient for non-linear stiffness range
+MCLA_K1 = MCL_K2/4/MCL_L0/MCL_ET
+** Calculate reference relative displacements
+MCLA_DF=MCL_L0-MCL_L-50
+MCLA_D0=(MCL_L0-MCL_L)/MCLA_num_sp_ser
+MCLA_D1=(MCL_L0*(1+MCL_ET/2)-MCL_L)/MCLA_num_sp_ser
+MCLA_D2=(MCL_L0*(1+MCL_ET)-MCL_L)/MCLA_num_sp_ser
+MCLA_D3=(MCL_L0*(1+MCL_ET*3/2)-MCL_L)/MCLA_num_sp_ser
+MCLA_D4=(MCL_L0*(1+2*MCL_ET)-MCL_L)/MCLA_num_sp_ser
+MCLA_D5=(MCL_L0*(1+4*MCL_ET)-MCL_L)/MCLA_num_sp_ser
+MCLA_D6=(MCL_L0*(1+10*MCL_ET)-MCL_L)/MCLA_num_sp_ser
+**
+MCLA_DD0=(MCL_L0-MCL_L)
+MCLA_DD1=(MCL_L0*(1+MCL_ET/2)-MCL_L)
+MCLA_DD2=(MCL_L0*(1+MCL_ET)-MCL_L)
+MCLA_DD3=(MCL_L0*(1+MCL_ET*3/2)-MCL_L)
+MCLA_DD4=(MCL_L0*(1+2*MCL_ET)-MCL_L)
+MCLA_DD5=(MCL_L0*(1+4*MCL_ET)-MCL_L)
+MCLA_DD6=(MCL_L0*(1+10*MCL_ET)-MCL_L)
+** Calculate reference ligament forces
+MCLA_FF=0 
+MCLA_F0=0 
+MCLA_F1=(MCLA_K1*(MCL_L+MCLA_DD1-MCL_L0)**2)/MCLA_num_sp_par 
+MCLA_F2=(MCLA_K1*(MCL_L+MCLA_DD2-MCL_L0)**2)/MCLA_num_sp_par 
+MCLA_F3=(MCLA_K1*(MCL_L+MCLA_DD3-MCL_L0)**2)/MCLA_num_sp_par 
+MCLA_F4=(MCLA_K1*(MCL_L+MCLA_DD4-MCL_L0)**2)/MCLA_num_sp_par 
+MCLA_F5=(MCL_K2*(MCL_L+MCLA_DD5-(1+MCL_ET)*MCL_L0))/MCLA_num_sp_par 
+MCLA_F6=(MCL_K2*(MCL_L+MCLA_DD6-(1+MCL_ET)*MCL_L0))/MCLA_num_sp_par 
+**
+**
+***************************************************************
+*PARAMETER
+MCLM_num_sp_par = 1.0
+MCLM_num_sp_ser = 1.0
+** MCL_L0=free length of the MCLM
+MCL_L0 = MCL_L / MCLM_EREF
+** MCLM_K1=calculated coefficient for non-linear stiffness range
+MCLM_K1 = MCL_K2/4/MCL_L0/MCL_ET
+** Calculate reference relative displacements
+MCLM_DF=MCL_L0-MCL_L-50
+MCLM_D0=(MCL_L0-MCL_L)/MCLM_num_sp_ser
+MCLM_D1=(MCL_L0*(1+MCL_ET/2)-MCL_L)/MCLM_num_sp_ser
+MCLM_D2=(MCL_L0*(1+MCL_ET)-MCL_L)/MCLM_num_sp_ser
+MCLM_D3=(MCL_L0*(1+MCL_ET*3/2)-MCL_L)/MCLM_num_sp_ser
+MCLM_D4=(MCL_L0*(1+2*MCL_ET)-MCL_L)/MCLM_num_sp_ser
+MCLM_D5=(MCL_L0*(1+4*MCL_ET)-MCL_L)/MCLM_num_sp_ser
+MCLM_D6=(MCL_L0*(1+10*MCL_ET)-MCL_L)/MCLM_num_sp_ser
+**
+MCLM_DD0=(MCL_L0-MCL_L)
+MCLM_DD1=(MCL_L0*(1+MCL_ET/2)-MCL_L)
+MCLM_DD2=(MCL_L0*(1+MCL_ET)-MCL_L)
+MCLM_DD3=(MCL_L0*(1+MCL_ET*3/2)-MCL_L)
+MCLM_DD4=(MCL_L0*(1+2*MCL_ET)-MCL_L)
+MCLM_DD5=(MCL_L0*(1+4*MCL_ET)-MCL_L)
+MCLM_DD6=(MCL_L0*(1+10*MCL_ET)-MCL_L)
+** Calculate reference ligament forces
+MCLM_FF=0 
+MCLM_F0=0 
+MCLM_F1=(MCLM_K1*(MCL_L+MCLM_DD1-MCL_L0)**2)/MCLM_num_sp_par 
+MCLM_F2=(MCLM_K1*(MCL_L+MCLM_DD2-MCL_L0)**2)/MCLM_num_sp_par 
+MCLM_F3=(MCLM_K1*(MCL_L+MCLM_DD3-MCL_L0)**2)/MCLM_num_sp_par 
+MCLM_F4=(MCLM_K1*(MCL_L+MCLM_DD4-MCL_L0)**2)/MCLM_num_sp_par 
+MCLM_F5=(MCL_K2*(MCL_L+MCLM_DD5-(1+MCL_ET)*MCL_L0))/MCLM_num_sp_par 
+MCLM_F6=(MCL_K2*(MCL_L+MCLM_DD6-(1+MCL_ET)*MCL_L0))/MCLM_num_sp_par 
+**
+***************************************************************
+*PARAMETER
+MCLP_num_sp_par = 1.0
+MCLP_num_sp_ser = 1.0
+** MCL_L0=free length of the MCLP
+MCL_L0 = MCL_L / MCLP_EREF
+** MCLP_K1=calculated coefficient for non-linear stiffness range
+MCLP_K1 = MCL_K2/4/MCL_L0/MCL_ET
+** Calculate reference relative displacements
+MCLP_DF=MCL_L0-MCL_L-50
+MCLP_D0=(MCL_L0-MCL_L)/MCLP_num_sp_ser
+MCLP_D1=(MCL_L0*(1+MCL_ET/2)-MCL_L)/MCLP_num_sp_ser
+MCLP_D2=(MCL_L0*(1+MCL_ET)-MCL_L)/MCLP_num_sp_ser
+MCLP_D3=(MCL_L0*(1+MCL_ET*3/2)-MCL_L)/MCLP_num_sp_ser
+MCLP_D4=(MCL_L0*(1+2*MCL_ET)-MCL_L)/MCLP_num_sp_ser
+MCLP_D5=(MCL_L0*(1+4*MCL_ET)-MCL_L)/MCLP_num_sp_ser
+MCLP_D6=(MCL_L0*(1+10*MCL_ET)-MCL_L)/MCLP_num_sp_ser
+**
+MCLP_DD0=(MCL_L0-MCL_L)
+MCLP_DD1=(MCL_L0*(1+MCL_ET/2)-MCL_L)
+MCLP_DD2=(MCL_L0*(1+MCL_ET)-MCL_L)
+MCLP_DD3=(MCL_L0*(1+MCL_ET*3/2)-MCL_L)
+MCLP_DD4=(MCL_L0*(1+2*MCL_ET)-MCL_L)
+MCLP_DD5=(MCL_L0*(1+4*MCL_ET)-MCL_L)
+MCLP_DD6=(MCL_L0*(1+10*MCL_ET)-MCL_L)
+** Calculate reference ligament forces
+MCLP_FF=0 
+MCLP_F0=0 
+MCLP_F1=(MCLP_K1*(MCL_L+MCLP_DD1-MCL_L0)**2)/MCLP_num_sp_par 
+MCLP_F2=(MCLP_K1*(MCL_L+MCLP_DD2-MCL_L0)**2)/MCLP_num_sp_par 
+MCLP_F3=(MCLP_K1*(MCL_L+MCLP_DD3-MCL_L0)**2)/MCLP_num_sp_par 
+MCLP_F4=(MCLP_K1*(MCL_L+MCLP_DD4-MCL_L0)**2)/MCLP_num_sp_par 
+MCLP_F5=(MCL_K2*(MCL_L+MCLP_DD5-(1+MCL_ET)*MCL_L0))/MCLP_num_sp_par 
+MCLP_F6=(MCL_K2*(MCL_L+MCLP_DD6-(1+MCL_ET)*MCL_L0))/MCLP_num_sp_par
+***************************************************************
+*PARAMETER
+dMCL_num_sp_par = 3.0
+dMCL_num_sp_ser = 1.0
+** dMCL_L0=free length of the dMCL
+dMCL_L0 = dMCL_L / dMCL_EREF
+** dMCL_K1=calculated coefficient for non-linear stiffness range
+dMCL_K1 = dMCL_K2/4/dMCL_L0/dMCL_ET
+** Calculate reference relative displacements
+dMCL_DF=dMCL_L0-dMCL_L-50
+dMCL_D0=(dMCL_L0-dMCL_L)/dMCL_num_sp_ser
+dMCL_D1=(dMCL_L0*(1+dMCL_ET/2)-dMCL_L)/dMCL_num_sp_ser
+dMCL_D2=(dMCL_L0*(1+dMCL_ET)-dMCL_L)/dMCL_num_sp_ser
+dMCL_D3=(dMCL_L0*(1+dMCL_ET*3/2)-dMCL_L)/dMCL_num_sp_ser
+dMCL_D4=(dMCL_L0*(1+2*dMCL_ET)-dMCL_L)/dMCL_num_sp_ser
+dMCL_D5=(dMCL_L0*(1+4*dMCL_ET)-dMCL_L)/dMCL_num_sp_ser
+dMCL_D6=(dMCL_L0*(1+10*dMCL_ET)-dMCL_L)/dMCL_num_sp_ser
+**
+dMCL_DD0=(dMCL_L0-dMCL_L)
+dMCL_DD1=(dMCL_L0*(1+dMCL_ET/2)-dMCL_L)
+dMCL_DD2=(dMCL_L0*(1+dMCL_ET)-dMCL_L)
+dMCL_DD3=(dMCL_L0*(1+dMCL_ET*3/2)-dMCL_L)
+dMCL_DD4=(dMCL_L0*(1+2*dMCL_ET)-dMCL_L)
+dMCL_DD5=(dMCL_L0*(1+4*dMCL_ET)-dMCL_L)
+dMCL_DD6=(dMCL_L0*(1+10*dMCL_ET)-dMCL_L)
+** Calculate reference ligament forces
+dMCL_FF=0 
+dMCL_F0=0 
+dMCL_F1=(dMCL_K1*(dMCL_L+dMCL_DD1-dMCL_L0)**2)/dMCL_num_sp_par 
+dMCL_F2=(dMCL_K1*(dMCL_L+dMCL_DD2-dMCL_L0)**2)/dMCL_num_sp_par 
+dMCL_F3=(dMCL_K1*(dMCL_L+dMCL_DD3-dMCL_L0)**2)/dMCL_num_sp_par 
+dMCL_F4=(dMCL_K1*(dMCL_L+dMCL_DD4-dMCL_L0)**2)/dMCL_num_sp_par 
+dMCL_F5=(dMCL_K2*(dMCL_L+dMCL_DD5-(1+dMCL_ET)*dMCL_L0))/dMCL_num_sp_par 
+dMCL_F6=(dMCL_K2*(dMCL_L+dMCL_DD6-(1+dMCL_ET)*dMCL_L0))/dMCL_num_sp_par
+**
+***************************************************************
+*PARAMETER
+POL_num_sp_par = 2.0
+POL_num_sp_ser = 1.0
+** POL_L0=free length of the POL
+POL_L0 = POL_L / POL_EREF
+** POL_K1=calculated coefficient for non-linear stiffness range
+POL_K1 = POL_K2/4/POL_L0/POL_ET
+** Calculate reference relative displacements
+POL_DF=POL_L0-POL_L-50
+POL_D0=(POL_L0-POL_L)/POL_num_sp_ser
+POL_D1=(POL_L0*(1+POL_ET/2)-POL_L)/POL_num_sp_ser
+POL_D2=(POL_L0*(1+POL_ET)-POL_L)/POL_num_sp_ser
+POL_D3=(POL_L0*(1+POL_ET*3/2)-POL_L)/POL_num_sp_ser
+POL_D4=(POL_L0*(1+2*POL_ET)-POL_L)/POL_num_sp_ser
+POL_D5=(POL_L0*(1+4*POL_ET)-POL_L)/POL_num_sp_ser
+POL_D6=(POL_L0*(1+50*POL_ET)-POL_L)/POL_num_sp_ser
+**
+POL_DD0=(POL_L0-POL_L)
+POL_DD1=(POL_L0*(1+POL_ET/2)-POL_L)
+POL_DD2=(POL_L0*(1+POL_ET)-POL_L)
+POL_DD3=(POL_L0*(1+POL_ET*3/2)-POL_L)
+POL_DD4=(POL_L0*(1+2*POL_ET)-POL_L)
+POL_DD5=(POL_L0*(1+4*POL_ET)-POL_L)
+POL_DD6=(POL_L0*(1+50*POL_ET)-POL_L)
+** Calculate reference ligament forces
+POL_FF=0 
+POL_F0=0 
+POL_F1=(POL_K1*(POL_L+POL_DD1-POL_L0)**2)/POL_num_sp_par 
+POL_F2=(POL_K1*(POL_L+POL_DD2-POL_L0)**2)/POL_num_sp_par 
+POL_F3=(POL_K1*(POL_L+POL_DD3-POL_L0)**2)/POL_num_sp_par 
+POL_F4=(POL_K1*(POL_L+POL_DD4-POL_L0)**2)/POL_num_sp_par 
+POL_F5=(POL_K2*(POL_L+POL_DD5-(1+POL_ET)*POL_L0))/POL_num_sp_par 
+POL_F6=(POL_K2*(POL_L+POL_DD6-(1+POL_ET)*POL_L0))/POL_num_sp_par  
+**
+**
+*CONNECTOR BEHAVIOR, NAME=MCLa_behavior
+*CONNECTOR ELASTICITY, COMPONENT=1, NONLINEAR
+<MCLA_FF> , <MCLA_DF>
+<MCLA_F0> , <MCLA_D0>
+<MCLA_F1> , <MCLA_D1>
+<MCLA_F2> , <MCLA_D2>
+<MCLA_F3> , <MCLA_D3>
+<MCLA_F4> , <MCLA_D4>
+<MCLA_F5> , <MCLA_D5>
+<MCLA_F6> , <MCLA_D6>
+*CONNECTOR DAMPING, COMPONENT=1
+0.05
+**
+*CONNECTOR BEHAVIOR, NAME=MCLm_behavior
+*CONNECTOR ELASTICITY, COMPONENT=1, NONLINEAR
+<MCLM_FF> , <MCLM_DF>
+<MCLM_F0> , <MCLM_D0>
+<MCLM_F1> , <MCLM_D1>
+<MCLM_F2> , <MCLM_D2>
+<MCLM_F3> , <MCLM_D3>
+<MCLM_F4> , <MCLM_D4>
+<MCLM_F5> , <MCLM_D5>
+<MCLM_F6> , <MCLM_D6>
+*CONNECTOR DAMPING, COMPONENT=1
+0.05
+**
+*CONNECTOR BEHAVIOR, NAME=MCLp_behavior
+*CONNECTOR ELASTICITY, COMPONENT=1, NONLINEAR
+<MCLP_FF> , <MCLP_DF>
+<MCLP_F0> , <MCLP_D0>
+<MCLP_F1> , <MCLP_D1>
+<MCLP_F2> , <MCLP_D2>
+<MCLP_F3> , <MCLP_D3>
+<MCLP_F4> , <MCLP_D4>
+<MCLP_F5> , <MCLP_D5>
+<MCLP_F6> , <MCLP_D6>
+*CONNECTOR DAMPING, COMPONENT=1
+0.05
+**
+*CONNECTOR BEHAVIOR, NAME=dMCL_behavior
+*CONNECTOR ELASTICITY, COMPONENT=1, NONLINEAR
+<dMCL_FF> , <dMCL_DF>
+<dMCL_F0> , <dMCL_D0>
+<dMCL_F1> , <dMCL_D1>
+<dMCL_F2> , <dMCL_D2>
+<dMCL_F3> , <dMCL_D3>
+<dMCL_F4> , <dMCL_D4>
+<dMCL_F5> , <dMCL_D5>
+<dMCL_F6> , <dMCL_D6>
+*CONNECTOR DAMPING, COMPONENT=1
+0.05
+**
+*CONNECTOR BEHAVIOR, NAME=POL_behavior
+*CONNECTOR ELASTICITY, COMPONENT=1, NONLINEAR
+<POL_FF> , <POL_DF>
+<POL_F0> , <POL_D0>
+<POL_F1> , <POL_D1>
+<POL_F2> , <POL_D2>
+<POL_F3> , <POL_D3>
+<POL_F4> , <POL_D4>
+<POL_F5> , <POL_D5>
+<POL_F6> , <POL_D6>
+*CONNECTOR DAMPING, COMPONENT=1
+0.05
+**
+*MASS, ELSET=lig_mcl_mass
+1E-6
+*ROTARY INERTIA, ELSET=lig_mcl_rot
+0.001,0.001,0.001
+**

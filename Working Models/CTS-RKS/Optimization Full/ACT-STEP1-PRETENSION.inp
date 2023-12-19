@@ -1,0 +1,21 @@
+***** Musce force Amplitudes for STEP1
+****AMPLITUDE, VALUE=RELATIVE, SMOOTH=0.3, NAME=recfem1
+***0.0,	0.
+***0.2,	100.
+***0.5,	100.
+***1.0,	100.
+****AMPLITUDE, VALUE=RELATIVE, SMOOTH=0.3, NAME=vasmed1
+***0.0,	0.
+***0.2,	100.
+***0.5,	100.
+***1.0,	100.
+****AMPLITUDE, VALUE=RELATIVE, SMOOTH=0.3, NAME=vaslat1
+***0.0,	0.
+***0.2,	100.
+***0.5,	100.
+***1.0,	100.
+****AMPLITUDE, VALUE=RELATIVE, SMOOTH=0.3, NAME=vasint1
+***0.0,	0.
+***0.2,	100.
+***0.5,	100.
+***1.0,	100.

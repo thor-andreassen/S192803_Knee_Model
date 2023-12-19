@@ -1,0 +1,56 @@
+**
+*CONNECTOR SECTION, ELSET=ALS_1D, BEHAVIOR=als_behavior
+AXIAL,
+**
+*parameter
+ALS_num_sp_par = 3.0
+ALS_num_sp_ser = 1.0
+** ALS_L0=free length of the ALS
+ALS_L0 = ALS_L / ALS_EREF
+** ALS_K1=calculated coefficient for non-linear stiffness range
+ALS_K1 = ALS_K2/4/ALS_L0/ALS_ET
+** Calculate reference relative displacements
+ALS_DF=ALS_L0-ALS_L-50
+ALS_D0=(ALS_L0-ALS_L)/ALS_num_sp_ser
+ALS_D1=(ALS_L0*(1+ALS_ET/2)-ALS_L)/ALS_num_sp_ser
+ALS_D2=(ALS_L0*(1+ALS_ET)-ALS_L)/ALS_num_sp_ser
+ALS_D3=(ALS_L0*(1+ALS_ET*3/2)-ALS_L)/ALS_num_sp_ser
+ALS_D4=(ALS_L0*(1+2*ALS_ET)-ALS_L)/ALS_num_sp_ser
+ALS_D5=(ALS_L0*(1+4*ALS_ET)-ALS_L)/ALS_num_sp_ser
+ALS_D6=(ALS_L0*(1+50*ALS_ET)-ALS_L)/ALS_num_sp_ser
+**
+ALS_DD0=(ALS_L0-ALS_L)
+ALS_DD1=(ALS_L0*(1+ALS_ET/2)-ALS_L)
+ALS_DD2=(ALS_L0*(1+ALS_ET)-ALS_L)
+ALS_DD3=(ALS_L0*(1+ALS_ET*3/2)-ALS_L)
+ALS_DD4=(ALS_L0*(1+2*ALS_ET)-ALS_L)
+ALS_DD5=(ALS_L0*(1+4*ALS_ET)-ALS_L)
+ALS_DD6=(ALS_L0*(1+50*ALS_ET)-ALS_L)
+** Calculate reference ligament forces
+ALS_FF=0 
+ALS_F0=0 
+ALS_F1=(ALS_K1*(ALS_L+ALS_DD1-ALS_L0)**2)/ALS_num_sp_par 
+ALS_F2=(ALS_K1*(ALS_L+ALS_DD2-ALS_L0)**2)/ALS_num_sp_par 
+ALS_F3=(ALS_K1*(ALS_L+ALS_DD3-ALS_L0)**2)/ALS_num_sp_par 
+ALS_F4=(ALS_K1*(ALS_L+ALS_DD4-ALS_L0)**2)/ALS_num_sp_par 
+ALS_F5=(ALS_K2*(ALS_L+ALS_DD5-(1+ALS_ET)*ALS_L0))/ALS_num_sp_par 
+ALS_F6=(ALS_K2*(ALS_L+ALS_DD6-(1+ALS_ET)*ALS_L0))/ALS_num_sp_par 
+**
+*CONNECTOR BEHAVIOR, NAME=als_behavior
+*CONNECTOR ELASTICITY, COMPONENT=1, NONLINEAR
+<ALS_FF> , <ALS_DF>
+<ALS_F0> , <ALS_D0>
+<ALS_F1> , <ALS_D1>
+<ALS_F2> , <ALS_D2>
+<ALS_F3> , <ALS_D3>
+<ALS_F4> , <ALS_D4>
+<ALS_F5> , <ALS_D5>
+<ALS_F6> , <ALS_D6>
+*CONNECTOR DAMPING, COMPONENT=1
+0.05
+**     
+*MASS, ELSET=lig_als_mass
+1E-6
+*ROTARY INERTIA, ELSET=lig_als_rot
+0.001,0.001,0.001
+**

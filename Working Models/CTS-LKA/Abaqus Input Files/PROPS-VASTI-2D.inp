@@ -1,0 +1,135 @@
+****MEMBRANE SECTION, ELSET=VASTI, MATERIAL=TENDON_VASTI_MAT
+***1.0,
+****MATERIAL, NAME=TENDON_VASTI_MAT
+***** material definitions have STRESS (MPa) vs STRAIN (%)
+*******HYPERELASTIC, POISSON=0.498, TEST DATA INPUT, VAN DER WAALS, BETA=1
+********
+*******UNIAXIAL TEST DATA
+******0.0062,  0.07
+******0.0144,  0.15
+******0.0288, 0.25
+******0.0504, 0.36
+******0.0728, 0.48
+******0.1003, 0.67
+******0.1185, 0.79
+****DENSITY			
+***5E-7,
+********
+*******DAMPING, ALPHA=100.
+********
+****ELASTIC
+***1000, 0.498
+****MASS, ELSET=VASTI_MASS
+***1E-6
+*****************VASTI DEFINITION***********************************
+****PARAMETER
+***** VASTI_L=the nominal VASTIament length(mm)
+***VASTI_L=50.0
+***** VASTI_eref=the reference strain (+)=added slack, (-)=initial force
+***VASTI_eref=0.0
+***** VASTI_k=the nominal stiffness (N/unit strain); for (N/mm) divide VASTI_k by VASTI_L
+***VASTI_k = 200000.0
+***** VASTI_num_sp_par=number of springs in parallel representing whole VASTIament
+***VASTI_num_sp_par = 18.0
+***VASTI_num_sp_ser = 12.0
+*****
+***k_ratio=50000.0/VASTI_k
+***VASTI_sp_L = VASTI_L/VASTI_num_sp_ser
+*****
+****PARAMETER
+***VASTI_Lref=VASTI_sp_L
+***VASTI_L0=VASTI_Lref/(VASTI_eref+1)
+*****
+***VASTI_d0=(VASTI_Lref-VASTI_L0)/VASTI_num_sp_ser
+***VASTI_d2=((VASTI_Lref+0.02*VASTI_Lref)-VASTI_L0)/VASTI_num_sp_ser
+***VASTI_d4=((VASTI_Lref+0.04*VASTI_Lref)-VASTI_L0)/VASTI_num_sp_ser
+***VASTI_d6=((VASTI_Lref+0.06*VASTI_Lref)-VASTI_L0)/VASTI_num_sp_ser
+***VASTI_d10=((VASTI_Lref+0.1*VASTI_Lref)-VASTI_L0)/VASTI_num_sp_ser
+***VASTI_d20=((VASTI_Lref+0.2*VASTI_Lref)-VASTI_L0)/VASTI_num_sp_ser
+***VASTI_d100=((VASTI_Lref+1.0*VASTI_Lref)-VASTI_L0)/VASTI_num_sp_ser
+***VASTI_d200=((VASTI_Lref+2.0*VASTI_Lref)-VASTI_L0)/VASTI_num_sp_ser
+*****
+***VASTI_f0=0.0*k_ratio
+***VASTI_f2=420.0/(VASTI_num_sp_par*VASTI_num_sp_ser*k_ratio)
+***VASTI_f4=830.0/(VASTI_num_sp_par*VASTI_num_sp_ser*k_ratio)
+***VASTI_f6=1500.0/(VASTI_num_sp_par*VASTI_num_sp_ser*k_ratio)
+***VASTI_f10=3600.0/(VASTI_num_sp_par*VASTI_num_sp_ser*k_ratio)
+***VASTI_f20=9000.0/(VASTI_num_sp_par*VASTI_num_sp_ser*k_ratio)
+***VASTI_f100=50000.0/(VASTI_num_sp_par*VASTI_num_sp_ser*k_ratio)
+***VASTI_f200=75000.0/(VASTI_num_sp_par*VASTI_num_sp_ser*k_ratio)
+*****
+****CONNECTOR BEHAVIOR, NAME=VASTI_SP_BEHAVIOR
+****CONNECTOR ELASTICITY, COMPONENT=1, NONLINEAR
+***0.0 , -<VASTI_d100>
+***<VASTI_f0> , <VASTI_d0>
+***<VASTI_f2> , <VASTI_d2>
+***<VASTI_f4> , <VASTI_d4>
+***<VASTI_f6> , <VASTI_d6>
+***<VASTI_f10> , <VASTI_d10>
+***<VASTI_f20> , <VASTI_d20>
+***<VASTI_f100> , <VASTI_d100>
+***<VASTI_f200> , <VASTI_d200>
+*****
+*****************VASTI_TRANS DEFINITION***********************************
+****PARAMETER
+***** VASTI_TRANS_L=the nominal VASTI_TRANSament length(mm)
+***VASTI_TRANS_L=5.0
+***** VASTI_TRANS_eref=the reference strain (+)=added slack, (-)=initial force
+***VASTI_TRANS_eref=0.0
+***** VASTI_TRANS_k=the nominal stiffness (N/unit strain); for (N/mm) divide VASTI_TRANS_k by VASTI_TRANS_L
+***VASTI_TRANS_k = 50.0
+***** VASTI_TRANS_num_sp_par=number of springs in parallel representing whole VASTI_TRANSament
+***VASTI_TRANS_num_sp_par = 1.0
+***VASTI_TRANS_num_sp_ser = 1.0
+******************************
+***k_ratio=50.0/VASTI_TRANS_k
+***VASTI_TRANS_sp_L = VASTI_TRANS_L/VASTI_TRANS_num_sp_ser
+*****
+****PARAMETER
+***VASTI_TRANS_Lref=VASTI_TRANS_sp_L
+***VASTI_TRANS_L0=VASTI_TRANS_Lref/(VASTI_TRANS_eref+1)
+*****
+***VASTI_TRANS_d0=(VASTI_TRANS_Lref-VASTI_TRANS_L0)/VASTI_TRANS_num_sp_ser
+***VASTI_TRANS_d2=((VASTI_TRANS_Lref+0.02*VASTI_TRANS_Lref)-VASTI_TRANS_L0)/VASTI_TRANS_num_sp_ser
+***VASTI_TRANS_d4=((VASTI_TRANS_Lref+0.04*VASTI_TRANS_Lref)-VASTI_TRANS_L0)/VASTI_TRANS_num_sp_ser
+***VASTI_TRANS_d6=((VASTI_TRANS_Lref+0.06*VASTI_TRANS_Lref)-VASTI_TRANS_L0)/VASTI_TRANS_num_sp_ser
+***VASTI_TRANS_d10=((VASTI_TRANS_Lref+0.1*VASTI_TRANS_Lref)-VASTI_TRANS_L0)/VASTI_TRANS_num_sp_ser
+***VASTI_TRANS_d20=((VASTI_TRANS_Lref+0.2*VASTI_TRANS_Lref)-VASTI_TRANS_L0)/VASTI_TRANS_num_sp_ser
+***VASTI_TRANS_d100=((VASTI_TRANS_Lref+1.0*VASTI_TRANS_Lref)-VASTI_TRANS_L0)/VASTI_TRANS_num_sp_ser
+***VASTI_TRANS_d200=((VASTI_TRANS_Lref+2.0*VASTI_TRANS_Lref)-VASTI_TRANS_L0)/VASTI_TRANS_num_sp_ser
+*****
+***VASTI_TRANS_f0=0.0*k_ratio
+***VASTI_TRANS_f2=0.4/(VASTI_TRANS_num_sp_par*VASTI_TRANS_num_sp_ser*k_ratio)
+***VASTI_TRANS_f4=0.8/(VASTI_TRANS_num_sp_par*VASTI_TRANS_num_sp_ser*k_ratio)
+***VASTI_TRANS_f6=1.5/(VASTI_TRANS_num_sp_par*VASTI_TRANS_num_sp_ser*k_ratio)
+***VASTI_TRANS_f10=3.6/(VASTI_TRANS_num_sp_par*VASTI_TRANS_num_sp_ser*k_ratio)
+***VASTI_TRANS_f20=9.0/(VASTI_TRANS_num_sp_par*VASTI_TRANS_num_sp_ser*k_ratio)
+***VASTI_TRANS_f100=50.0/(VASTI_TRANS_num_sp_par*VASTI_TRANS_num_sp_ser*k_ratio)
+***VASTI_TRANS_f200=75.0/(VASTI_TRANS_num_sp_par*VASTI_TRANS_num_sp_ser*k_ratio)
+*****
+****CONNECTOR BEHAVIOR, NAME=VASTI_SP_TRANS_BEHAVIOR
+****CONNECTOR ELASTICITY, COMPONENT=1, NONLINEAR
+***0.0 , -<VASTI_TRANS_d100>
+***<VASTI_TRANS_f0> , <VASTI_TRANS_d0>
+***<VASTI_TRANS_f2> , <VASTI_TRANS_d2>
+***<VASTI_TRANS_f4> , <VASTI_TRANS_d4>
+***<VASTI_TRANS_f6> , <VASTI_TRANS_d6>
+***<VASTI_TRANS_f10> , <VASTI_TRANS_d10>
+***<VASTI_TRANS_f20> , <VASTI_TRANS_d20>
+***<VASTI_TRANS_f100> , <VASTI_TRANS_d100>
+***<VASTI_TRANS_f200> , <VASTI_TRANS_d200>
+*************************************************************************
+****SURFACE, NAME=SURF-VASTI-POS, MAX RATIO=0.8
+***VASTI, SPOS
+*****
+****SURFACE, NAME=SURF-VASTI-NEG, MAX RATIO=0.8
+***VASTI, SNEG
+****ROTARY INERTIA, ELSET=ATTACH_VASTI_PAT_RI
+***1.0000e-002,  1.0000e-002,  1.0000e-002 
+****ROTARY INERTIA, ELSET=ATTACH_VASMED_TEND_RI
+***1.0000e-002,  1.0000e-002,  1.0000e-002  
+****ROTARY INERTIA, ELSET=ATTACH_VASLAT_TEND_RI
+***1.0000e-002,  1.0000e-002,  1.0000e-002 
+****ROTARY INERTIA, ELSET=ATTACH_VASINT_TEND_RI
+***1.0000e-002,  1.0000e-002,  1.0000e-002  
+*****

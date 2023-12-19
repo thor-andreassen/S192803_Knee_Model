@@ -1,0 +1,92 @@
+**
+**** Ligament parameters: L = actual length, EREF = reference length, ET = length of toe region, K2 = spring constant
+**** ALS = ANTEROLATERAL STRUCTURE ****
+*PARAMETER
+ALS_L=46.295
+ALS_EREF=0.907910000000
+ALS_ET=0.03
+ALS_K2=65.412000000000
+**
+*******************************************************************************************************
+**
+**** ACL = ANTERIOR CRUCIATE LIG. PL = POSTEROLATERAL BUNDLE. AM = ANTEROMEDIAL BUNDLE ****
+*PARAMETER
+ACLpl_L=20.674
+ACLpl_EREF=0.934950000000
+ACLpl_ET=0.03
+ACLpl_K2=59.671000000000
+**
+ACLam_L= 34.886
+ACLam_EREF=0.986160000000
+ACLam_ET=0.03
+ACLam_K2=68.876000000000
+
+**
+*******************************************************************************************************
+**
+**** LCL = LATERAL COLLATERAL LIG ****
+*PARAMETER
+LCL_L=52.898
+LCL_EREF=0.950590000000
+LCL_ET=0.03
+LCL_K2=150.490000000000
+**
+*******************************************************************************************************
+**
+**** MCL = MEDIAL COLLATERAL LIG, dMCL = Deep MCL, POL = Posterior Oblique Lig****
+*PARAMETER
+MCL_L=103.518
+MCLA_EREF=0.95
+MCLM_EREF=1.030000000000
+MCLP_EREF=1.023000000000
+MCL_ET=0.03
+MCL_K2=50.390000000000
+**
+**
+dMCL_L=43.015
+dMCL_EREF=0.949970000000
+dMCL_ET=0.03
+dMCL_K2=50.997000000000
+**
+POL_L=38.783
+POL_EREF=1.148700000000
+POL_ET=0.03
+POL_K2=34.078000000000
+**
+*******************************************************************************************************
+**
+**** PCAP = POSTERIOR CAPSULE; PCAPL - LATERAL; PCAPM - MEDIAL ****
+*PARAMETER
+PCAPL_L=41.793
+PCAPL_EREF=0.90
+PCAPL_ET=0.03
+PCAPL_K2=90.
+**
+PCAPM_L=30.772
+PCAPM_EREF=0.92
+PCAPM_ET=0.03
+PCAPM_K2=90
+**
+*******************************************************************************************************
+**
+**** PCL = POSTERIOR CRUCIATE LIG. AL = ANTEROLATERAL BUNDLE. PM = POSTEROMEDIAL BUNDLE ****
+*PARAMETER
+PCLal_L=29.423
+PCLal_EREF=0.870430000000
+PCLal_ET=0.03
+PCLal_K2=37.438000000000
+**
+PCLpm_L=35.933
+PCLpm_EREF=0.812030000000
+PCLpm_ET=0.03
+PCLpm_K2=69.008000000000
+**
+*******************************************************************************************************
+**
+**PFL - POPLITEOFIBULAR LIGAMENT
+*PARAMETER
+PFL_L=36.200
+PFL_EREF=1.081100000000
+PFL_ET=0.03
+PFL_K2=34.283000000000
+**

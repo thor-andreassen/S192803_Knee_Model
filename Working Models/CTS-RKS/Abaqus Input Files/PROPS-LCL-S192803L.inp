@@ -1,0 +1,55 @@
+*CONNECTOR SECTION, ELSET=LCL_1D, BEHAVIOR=lcl_behavior
+AXIAL,
+**
+*parameter
+LCL_num_sp_par = 3.0
+LCL_num_sp_ser = 1.0
+** LCL_L0=free length of the LCL
+LCL_L0 = LCL_L / LCL_EREF
+** LCL_K1=calculated coefficient for non-linear stiffness range
+LCL_K1 = LCL_K2/4/LCL_L0/LCL_ET
+** Calculate reference relative displacements
+LCL_DF=LCL_L0-LCL_L-50
+LCL_D0=(LCL_L0-LCL_L)/LCL_num_sp_ser
+LCL_D1=(LCL_L0*(1+LCL_ET/2)-LCL_L)/LCL_num_sp_ser
+LCL_D2=(LCL_L0*(1+LCL_ET)-LCL_L)/LCL_num_sp_ser
+LCL_D3=(LCL_L0*(1+LCL_ET*3/2)-LCL_L)/LCL_num_sp_ser
+LCL_D4=(LCL_L0*(1+2*LCL_ET)-LCL_L)/LCL_num_sp_ser
+LCL_D5=(LCL_L0*(1+4*LCL_ET)-LCL_L)/LCL_num_sp_ser
+LCL_D6=(LCL_L0*(1+10*LCL_ET)-LCL_L)/LCL_num_sp_ser
+**
+LCL_DD0=(LCL_L0-LCL_L)
+LCL_DD1=(LCL_L0*(1+LCL_ET/2)-LCL_L)
+LCL_DD2=(LCL_L0*(1+LCL_ET)-LCL_L)
+LCL_DD3=(LCL_L0*(1+LCL_ET*3/2)-LCL_L)
+LCL_DD4=(LCL_L0*(1+2*LCL_ET)-LCL_L)
+LCL_DD5=(LCL_L0*(1+4*LCL_ET)-LCL_L)
+LCL_DD6=(LCL_L0*(1+10*LCL_ET)-LCL_L)
+** Calculate reference ligament forces
+LCL_FF=0
+LCL_F0=0
+LCL_F1=(LCL_K1*(LCL_L+LCL_DD1-LCL_L0)**2)/LCL_num_sp_par
+LCL_F2=(LCL_K1*(LCL_L+LCL_DD2-LCL_L0)**2)/LCL_num_sp_par
+LCL_F3=(LCL_K1*(LCL_L+LCL_DD3-LCL_L0)**2)/LCL_num_sp_par
+LCL_F4=(LCL_K1*(LCL_L+LCL_DD4-LCL_L0)**2)/LCL_num_sp_par
+LCL_F5=(LCL_K2*(LCL_L+LCL_DD5-(1+LCL_ET)*LCL_L0))/LCL_num_sp_par
+LCL_F6=(LCL_K2*(LCL_L+LCL_DD6-(1+LCL_ET)*LCL_L0))/LCL_num_sp_par
+**
+*CONNECTOR BEHAVIOR, NAME=lcl_behavior
+*CONNECTOR ELASTICITY, COMPONENT=1, NONLINEAR
+<LCL_FF> , <LCL_DF>
+<LCL_F0> , <LCL_D0>
+<LCL_F1> , <LCL_D1>
+<LCL_F2> , <LCL_D2>
+<LCL_F3> , <LCL_D3>
+<LCL_F4> , <LCL_D4>
+<LCL_F5> , <LCL_D5>
+<LCL_F6> , <LCL_D6>
+*CONNECTOR DAMPING, COMPONENT=1
+0.05
+**
+*MASS, ELSET=lig_lcl_mass
+1E-6
+*ROTARY INERTIA, ELSET=lig_lcl_rot
+0.001,0.001,0.001
+**

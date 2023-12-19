@@ -1,0 +1,81 @@
+****MEMBRANE SECTION, ELSET=RECT_FEM, MATERIAL=TENDON_RECT_FEM_MAT
+***1.0,
+****MATERIAL, NAME=TENDON_RECT_FEM_MAT
+***** material definitions have STRESS (MPa) vs STRAIN (%)
+*******HYPERELASTIC, POISSON=0.498, TEST DATA INPUT, VAN DER WAALS, BETA=1
+********
+*******UNIAXIAL TEST DATA
+******0.0062,  0.07
+******0.0144,  0.15
+******0.0288, 0.25
+******0.0504, 0.36
+******0.0728, 0.48
+******0.1003, 0.67
+******0.1185, 0.79
+****DENSITY			
+***5E-7,
+********
+*******DAMPING, ALPHA=100.
+********
+****ELASTIC
+***1000,0.498
+****MASS, ELSET=RECT_FEM_MASS
+***1E-6
+*****************RF DEFINITION***********************************
+****PARAMETER
+***** RF_L=the nominal RFament length(mm)
+***RF_L=50.0
+***** RF_eref=the reference strain (+)=added slack, (-)=initial force
+***RF_eref=0.0
+***** RF_k=the nominal stiffness (N/unit strain); for (N/mm) divide RF_k by RF_L
+***RF_k = 200000.0
+***** RF_num_sp_par=number of springs in parallel representing whole RFament
+***RF_num_sp_par = 8.0
+***RF_num_sp_ser = 12.0
+******************************
+***k_ratio=50000.0/RF_k
+***RF_sp_L = RF_L/RF_num_sp_ser
+*****
+****PARAMETER
+***RF_Lref=RF_sp_L
+***RF_L0=RF_Lref/(RF_eref+1)
+*****
+***RF_d0=(RF_Lref-RF_L0)/RF_num_sp_ser
+***RF_d2=((RF_Lref+0.02*RF_Lref)-RF_L0)/RF_num_sp_ser
+***RF_d4=((RF_Lref+0.04*RF_Lref)-RF_L0)/RF_num_sp_ser
+***RF_d6=((RF_Lref+0.06*RF_Lref)-RF_L0)/RF_num_sp_ser
+***RF_d10=((RF_Lref+0.1*RF_Lref)-RF_L0)/RF_num_sp_ser
+***RF_d20=((RF_Lref+0.2*RF_Lref)-RF_L0)/RF_num_sp_ser
+***RF_d100=((RF_Lref+1.0*RF_Lref)-RF_L0)/RF_num_sp_ser
+***RF_d200=((RF_Lref+2.0*RF_Lref)-RF_L0)/RF_num_sp_ser
+*****
+***RF_f0=0.0*k_ratio
+***RF_f2=420.0/(RF_num_sp_par*RF_num_sp_ser*k_ratio)
+***RF_f4=830.0/(RF_num_sp_par*RF_num_sp_ser*k_ratio)
+***RF_f6=1500.0/(RF_num_sp_par*RF_num_sp_ser*k_ratio)
+***RF_f10=3600.0/(RF_num_sp_par*RF_num_sp_ser*k_ratio)
+***RF_f20=9000.0/(RF_num_sp_par*RF_num_sp_ser*k_ratio)
+***RF_f100=50000.0/(RF_num_sp_par*RF_num_sp_ser*k_ratio)
+***RF_f200=75000.0/(RF_num_sp_par*RF_num_sp_ser*k_ratio)
+*****
+****CONNECTOR BEHAVIOR, NAME=RF_SP_BEHAVIOR
+****CONNECTOR ELASTICITY, COMPONENT=1, NONLINEAR
+***0.0 , -<RF_d100>
+***<RF_f0> , <RF_d0>
+***<RF_f2> , <RF_d2>
+***<RF_f4> , <RF_d4>
+***<RF_f6> , <RF_d6>
+***<RF_f10> , <RF_d10>
+***<RF_f20> , <RF_d20>
+***<RF_f100> , <RF_d100>
+***<RF_f200> , <RF_d200>
+*****
+****SURFACE, NAME=SURF-RECT_FEM, MAX RATIO=0.8
+***RECT_FEM, SNEG
+*****
+****ROTARY INERTIA, ELSET=ATTACH_RF_FEM_RI
+***0.001,0.001,0.001
+****ROTARY INERTIA, ELSET=ATTACH_RF_PAT_RI
+***0.001,0.001,0.001
+*****
+*****

@@ -1,0 +1,74 @@
+*********************************************************************
+**
+** FEMUR BONE PROPERTIES
+**
+*********************************************************************
+**
+**Femur rigid body reference node
+*NODE, NSET=femur_rbrn
+	1900000,	-0.03813,	39.72561,	-8.52141
+**
+*ELEMENT, TYPE=MASS, ELSET=FEMUR_MASS
+1900000, 1900000
+*MASS, ELSET=FEMUR_MASS
+1E-5
+*ELEMENT, TYPE=ROTARYI, ELSET=FEMUR_INERTIA
+1980000, 1900000
+*ROTARY INERTIA, ELSET=FEMUR_INERTIA
+.1,.1,.1
+**
+*SURFACE, NAME=SURF-FEMUR_BONE
+BONE-FEMUR, SPOS
+**
+*RIGID BODY, ELSET=BONE-FEMUR, REF NODE=1900000
+**
+**
+*********************************************************************
+**
+** TIBIA BONE PROPERTIES
+**
+*********************************************************************
+**
+*NODE, NSET=tibia_rbrn
+	1200000,	13.5204,	47.15103,	-85.7663
+**
+*ELEMENT, TYPE=MASS, ELSET=TIBIA_MASS
+1200000, 1200000
+*MASS, ELSET=TIBIA_MASS
+1E-5
+*ELEMENT, TYPE=ROTARYI, ELSET=TIBIA_INERTIA
+1280000, 1200000
+*ROTARY INERTIA, ELSET=TIBIA_INERTIA
+.1,.1,.1
+**
+*SURFACE, NAME=SURF-TIBIA_BONE
+BONE-TIBIA, SPOS
+****SURFACE, NAME=SURF-TIBIA_BONE
+***BONE-TIBFIB-TIBIA, SPOS
+**
+*RIGID BODY, ELSET=BONE-TIBIA, REF NODE=1200000
+**
+
+*********************************************************************
+**
+** PATELLA BONE PROPERTIES
+**
+*********************************************************************
+**
+****NODE, NSET=patella_rbrn
+***	6400000,	12.517400,	-76.113200,	25.293400
+*****
+****ELEMENT, TYPE=MASS, ELSET=PATELLA_MASS
+***6400000, 6400000
+****MASS, ELSET=PATELLA_MASS
+***1E-5
+****ELEMENT, TYPE=ROTARYI, ELSET=PATELLA_INERTIA
+***6480000, 6400000 
+****ROTARY INERTIA, ELSET=PATELLA_INERTIA
+***0.1,0.1,0.1 
+*****
+****SURFACE, NAME=SURF-PATELLA_BONE
+***BONE-PATELLA, SPOS
+*****
+****RIGID BODY, ELSET=BONE-PATELLA, REF NODE=6400000 
+*****
